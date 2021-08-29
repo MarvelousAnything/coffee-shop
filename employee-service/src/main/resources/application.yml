@@ -4,10 +4,10 @@ management:
       exposure:
         include: '*'
 server:
-  port: 9000
+  port: 9001
 spring:
   application:
-    name: API-GATEWAY
+    name: EMPLOYEE-SERVICE
   cloud:
     config:
       enabled: false

@@ -10,6 +10,17 @@
     <modules>
         <module>cloud-gateway</module>
         <module>discovery-server</module>
+        <module>cloud-config-server</module>
+        <module>common</module>
+        <module>customer-service</module>
+        <module>store-service</module>
+        <module>location-service</module>
+        <module>order-service</module>
+        <module>menu-service</module>
+        <module>payment-service</module>
+        <module>stock-service</module>
+        <module>employee-service</module>
+        <module>line-service</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -19,9 +30,9 @@
         <docker.image.prefix>marvelousanything</docker.image.prefix>
         <docker-maven-plugin.version>1.4.13</docker-maven-plugin.version>
 
-        <maven.compiler.source>15</maven.compiler.source>
-        <maven.compiler.target>15</maven.compiler.target>
-        <java.version>15</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>11</java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -116,6 +127,11 @@
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>1.4.13</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -127,28 +143,17 @@
                 <pluginManagement>
                     <plugins>
                         <plugin>
-                            <groupId>com.spotify</groupId>
-                            <artifactId>dockerfile-maven-plugin</artifactId>
-                            <version>${docker-maven-plugin.version}</version>
-
+                            <groupId>com.google.cloud.tools</groupId>
+                            <artifactId>jib-maven-plugin</artifactId>
+                            <version>3.1.1</version>
                             <configuration>
-                                <repository>${docker.image.prefix}/${project.artifactId}</repository>
-                                <buildArgs>
-                                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                                    <SERVICE_NAME>${project.name}</SERVICE_NAME>
-                                </buildArgs>
-                                <tag>${project.version}</tag>
-                                <pullNewerImage>false</pullNewerImage>
+                                <to>
+                                    <image>registry.hub.docker.com/${docker.image.prefix}/${project.parent.artifactId}</image>
+                                    <tags>
+                                        <tag>${project.build.finalName}</tag>
+                                    </tags>
+                                </to>
                             </configuration>
-                            <executions>
-                                <execution>
-                                    <id>build-image</id>
-                                    <phase>package</phase>
-                                    <goals>
-                                        <goal>build</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
                         </plugin>
                     </plugins>
                 </pluginManagement>
