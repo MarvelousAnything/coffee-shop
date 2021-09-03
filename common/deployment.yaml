@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: common
+  labels:
+    app: common
+spec:
+  clusterIP: None
+  selector:
+    app: common
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: common
+  labels:
+    app: common
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: common
+  template:
+    metadata:
+      labels:
+        app: common
+    spec:
+      containers:
+      - name: common
+        image: common

@@ -2,14 +2,16 @@ server:
   port: 9296
 
 spring:
+  main:
+    show-banner: false
   application:
-    name: CONFIG-SERVER
+    name: CLOUD-CONFIG-SERVER
   cloud:
     config:
       server:
         git:
           uri: https://github.com/thearchermancoding/config-server
           clone-on-start: true
-eureka:
-  instance:
-    prefer-ip-address: true
+    kubernetes:
+      discovery:
+        service-name: cloud-config-server

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: line-service
+  labels:
+    app: line-service
+spec:
+  ports:
+  - port: 9003
+    protocol: TCP
+  clusterIP: None
+  selector:
+    app: line-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: line-service
+  labels:
+    app: line-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: line-service
+  template:
+    metadata:
+      labels:
+        app: line-service
+    spec:
+      containers:
+      - name: line-service
+        image: line-service

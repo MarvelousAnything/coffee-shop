@@ -1,0 +1,96 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+metadata:
+  name: coffee-shop
+build:
+  artifacts:
+  - image: cloud-config-server
+    context: .
+    buildpacks:
+      builder: gcr.io/buildpacks/builder:v1
+      env:
+        - GOOGLE_BUILDABLE=cloud-config-server
+  - image: cloud-gateway
+    context: .
+    buildpacks:
+      builder: gcr.io/buildpacks/builder:v1
+      env:
+        - GOOGLE_BUILDABLE=cloud-gateway
+  # - image: common
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=common
+  # - image: customer-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=customer-service
+  - image: employee-service
+    context: .
+    buildpacks:
+      builder: gcr.io/buildpacks/builder:v1
+      env:
+        - GOOGLE_BUILDABLE=employee-service
+  # - image: line-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=line-service
+  # - image: location-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=location-service
+  # - image: menu-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=menu-service
+  # - image: order-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=order-service
+  # - image: payment-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=payment-service
+  # - image: stock-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=stock-service
+  # - image: store-service
+  #   context: .
+  #   buildpacks:
+  #     builder: gcr.io/buildpacks/builder:v1
+  #     env:
+  #       - GOOGLE_BUILDABLE=store-service
+deploy:
+  kubectl:
+    manifests:
+    - cloud-config-server/deployment.yaml
+    - cloud-gateway/deployment.yaml
+    # - common/deployment.yaml
+    # - customer-service/deployment.yaml
+    - employee-service/deployment.yaml
+    - k8s/elk-stack/elasticsearch.yml
+    - k8s/elk-stack/kibana.yml
+    # - line-service/deployment.yaml
+    # - location-service/deployment.yaml
+    # - menu-service/deployment.yaml
+    # - order-service/deployment.yaml
+    # - payment-service/deployment.yaml
+    # - stock-service/deployment.yaml
+    # - store-service/deployment.yaml
+

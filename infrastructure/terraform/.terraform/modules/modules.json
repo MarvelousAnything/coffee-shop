@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"digitalocean","Source":"./modules/digitalocean","Dir":"modules/digitalocean"},{"Key":"helm","Source":"./modules/helm","Dir":"modules/helm"},{"Key":"helm.digitalocean","Source":"../digitalocean","Dir":"modules/digitalocean"},{"Key":"digitalocean.kubernetes","Source":"./kubernetes","Dir":"modules/digitalocean/kubernetes"}]}

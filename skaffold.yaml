@@ -1,0 +1,59 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+metadata:
+  name: coffee-shop
+build:
+  artifacts:
+  - image: cloud-config-server
+    jib:
+      project: com.marvelousanything:cloud-config-server
+  - image: cloud-gateway
+    jib:
+      project: com.marvelousanything:cloud-gateway
+  # - image: common
+  #   jib:
+  #     project: com.marvelousanything:common
+  # - image: customer-service
+  #   jib:
+  #     project: com.marvelousanything:customer-service
+  - image: employee-service
+    jib:
+      project: com.marvelousanything:employee-service
+  # - image: line-service
+  #   jib:
+  #     project: com.marvelousanything:line-service
+  # - image: location-service
+  #   jib:
+  #     project: com.marvelousanything:location-service
+  # - image: menu-service
+  #   jib:
+  #     project: com.marvelousanything:menu-service
+  # - image: order-service
+  #   jib:
+  #     project: com.marvelousanything:order-service
+  # - image: payment-service
+  #   jib:
+  #     project: com.marvelousanything:payment-service
+  # - image: stock-service
+  #   jib:
+  #     project: com.marvelousanything:stock-service
+  # - image: store-service
+  #   jib:
+  #     project: com.marvelousanything:store-service
+deploy:
+  kubectl:
+    manifests:
+    - cloud-config-server/deployment.yaml
+    - cloud-gateway/deployment.yaml
+    # - common/deployment.yaml
+    # - customer-service/deployment.yaml
+    - employee-service/deployment.yaml
+    # - k8s/elk-stack/elasticsearch.yml
+    # - k8s/elk-stack/kibana.yml
+    # - line-service/deployment.yaml
+    # - location-service/deployment.yaml
+    # - menu-service/deployment.yaml
+    # - order-service/deployment.yaml
+    # - payment-service/deployment.yaml
+    # - stock-service/deployment.yaml
+    # - store-service/deployment.yaml

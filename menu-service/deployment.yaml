@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: menu-service
+  labels:
+    app: menu-service
+spec:
+  ports:
+  - port: 9005
+    protocol: TCP
+  clusterIP: None
+  selector:
+    app: menu-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menu-service
+  labels:
+    app: menu-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: menu-service
+  template:
+    metadata:
+      labels:
+        app: menu-service
+    spec:
+      containers:
+      - name: menu-service
+        image: menu-service
